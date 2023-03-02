@@ -1,14 +1,11 @@
-FROM bitnami/minideb-extras:jessie
+FROM node:18-alpine
 
-MAINTAINER Bitnami <containers@bitnami.com>
+WORKDIR /app 
 
-COPY app-code/http-sample /app/http-sample
+COPY . .
 
-USER bitnami
+RUN yarn install --production 
 
-WORKDIR /app
+CMD ["node", "src/index.js"]
 
 EXPOSE 3000
-
-ENTRYPOINT ["/app/http-sample"]
-
